@@ -10,10 +10,8 @@ export const UserForm = ({ onDataSubmit }: IFormProps) => {
     formState: { errors },
   } = useForm<Form>();
 
-  const onSubmit = (data: Form) => {
-    console.log(data);
-    onDataSubmit(data);
-  };
+  const onSubmit = (data: Form) => onDataSubmit(data);
+
   watch("username");
   return (
     <form
@@ -23,20 +21,19 @@ export const UserForm = ({ onDataSubmit }: IFormProps) => {
       <div>
         <div className="mb-2 block">
           <Label
-            htmlFor="email"
-            value="User Email"
+            htmlFor="username"
+            value="User Name"
             color={errors.username && "failure"}
-            aria-label="Email label"
+            aria-label="User name label"
           />
         </div>
         <TextInput
           id="username"
-          placeholder="name@store.com"
-          aria-label="Email input"
-          type="email"
+          placeholder="User Name"
+          aria-label="Username input"
           {...register("username", { required: true })}
           color={errors.username && "failure"}
-          helperText={errors.username && "Email is required"}
+          helperText={errors.username && "User name  is required"}
         />
       </div>
 
