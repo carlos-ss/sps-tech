@@ -5,7 +5,7 @@ import UserForm from "@/components/UserForm";
 
 import { usePost } from "@/hooks/request";
 
-import { Form } from "@/types/Form";
+import { Form, ILoginForm } from "@/types/Form";
 import { IToasterProps } from "@/types/Toaster";
 import { IError, ILoginResponse } from "@/types/Request";
 
@@ -17,9 +17,9 @@ export const LoginPage = () => {
     message: "",
     type: "none",
   });
-  const mutation = usePost<ILoginResponse, IError, Form>(urls.auth);
+  const mutation = usePost<ILoginResponse, IError, ILoginForm>(urls.auth);
 
-  const handleDataSubmit = (data: Form) => {
+  const handleDataSubmit = (data: ILoginForm) => {
     mutation.mutate(data, {
       onSuccess: (data) => {
         // handle ui success
@@ -39,7 +39,7 @@ export const LoginPage = () => {
     <section className="w-3/4 flex items-center justify-center ">
       <div className="w-full max-w-md p-8 space-y-6 bg-gray-700 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <UserForm onDataSubmit={handleDataSubmit} />
+        <UserForm onDataSubmit={handleDataSubmit} type="login" />
         <Toaster {...toast} />
       </div>
     </section>
