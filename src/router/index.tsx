@@ -1,16 +1,14 @@
-import { createBrowserRouter, Outlet } from "react-router";
+import { createBrowserRouter } from "react-router";
 import Test from "../pages/Test";
 import RouteProtect from "./RouteProtect";
+import Layout from "@/components/Layout";
 
 const router = createBrowserRouter([
   {
     path: "buy",
     element: (
       <RouteProtect>
-        <div className="m-8">
-          layout
-          <Outlet />
-        </div>
+        <Layout />
       </RouteProtect>
     ),
     children: [
@@ -30,11 +28,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: (
-      <div>
-        public layout <Outlet />
-      </div>
-    ),
+    element: <Layout />,
     children: [
       {
         index: true,
