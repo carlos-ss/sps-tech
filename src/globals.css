@@ -1,1 +1,16 @@
 @import "tailwindcss";
+@tailwind utilities;
+
+@import "flowbite";
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light; /* Force light mode unless the `dark` class is present */
+  }
+}
+
+.dark {
+  color-scheme: dark;
+  background-color: #1a202c;
+  color: #ffffff;
+}
