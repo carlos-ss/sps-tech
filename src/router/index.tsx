@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router";
-import Test from "../pages/Test";
 import RouteProtect from "./RouteProtect";
 import Layout from "@/components/Layout";
 
@@ -17,10 +16,6 @@ const router = createBrowserRouter([
         element: <div className="bg-blue-50"> protected home</div>,
       },
 
-      {
-        path: "test",
-        element: <Test />,
-      },
       {
         path: "*",
         element: <div> protected 404</div>,
