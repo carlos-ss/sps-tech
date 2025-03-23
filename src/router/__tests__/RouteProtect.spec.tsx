@@ -3,6 +3,7 @@ import { MemoryRouter, Route, Routes } from "react-router";
 import RouteProtect from "../RouteProtect";
 import { userStore } from "@/store";
 import { vi } from "vitest";
+import Cookies from "js-cookie";
 
 const localRender = () => {
   render(
@@ -24,20 +25,26 @@ const localRender = () => {
 
 describe("RouteProtect", () => {
   it("redirects to /login if no token is present", () => {
-    localStorage.removeItem("token");
+    // no token has been set into js-cookie
     const setLoggedInSpy = vi.spyOn(userStore.getState(), "setLoggedIn");
 
+    // render
     localRender();
 
+    // validate that store has been called and redirected to login page
     expect(setLoggedInSpy).toHaveBeenCalledWith(false);
     expect(screen.getByText("Login Page")).toBeInTheDocument();
   });
 
   it("renders children if token is present", () => {
-    localStorage.setItem("token", "test-token");
+    // set token into js-cookie
+    Cookies.set("token", "test-token");
     const setLoggedInSpy = vi.spyOn(userStore.getState(), "setLoggedIn");
+
+    // render
     localRender();
 
+    // validate that store has been called and protected content is rendered
     expect(setLoggedInSpy).toHaveBeenCalledWith(true);
     expect(screen.getByText("Protected Content")).toBeInTheDocument();
   });
