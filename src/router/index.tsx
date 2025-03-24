@@ -8,6 +8,7 @@ import {
   HomePage,
   ProductDetailPage,
 } from "@/pages";
+import UserValidator from "./UserValidator";
 
 const router = createBrowserRouter([
   {
@@ -46,11 +47,19 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <LoginPage />,
+        element: (
+          <UserValidator>
+            <LoginPage />
+          </UserValidator>
+        ),
       },
       {
         path: "register",
-        element: <RegisterPage />,
+        element: (
+          <UserValidator>
+            <RegisterPage />
+          </UserValidator>
+        ),
       },
       {
         path: "*",
