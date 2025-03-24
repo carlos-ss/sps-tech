@@ -5,7 +5,7 @@ import UserForm from "@/components/UserForm";
 
 import { usePost } from "@/hooks/request";
 
-import { Form, ILoginForm } from "@/types/Form";
+import { ILoginForm } from "@/types/Form";
 import { IToasterProps } from "@/types/Toaster";
 import { IError, ILoginResponse } from "@/types/Request";
 
