@@ -69,5 +69,17 @@ describe("Header", () => {
       expect(screen.getByText("Cart")).toBeInTheDocument();
       expect(screen.getByText("Logout")).toBeInTheDocument();
     });
+    it("renders 'badge' with the number of products in the cart", () => {
+      mockUseStore(true);
+      (useStore as vi.Mock).mockImplementation(() => ({
+        loggedIn: true,
+        setLoggedIn: vi.fn(),
+        cart: { products: [1, 2, 3] },
+      }));
+
+      render(<Header isMobile={false} />);
+
+      expect(screen.getByLabelText("items in cart 3")).toBeInTheDocument();
+    });
   });
 });

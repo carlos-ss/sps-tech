@@ -1,9 +1,11 @@
+import { useStore } from "@/store";
 import { USER_LINKS } from "./constants";
 import { HeaderLink } from "./HeaderLink";
 import { TextInput } from "flowbite-react";
 import { HiSearch, HiShoppingCart } from "react-icons/hi";
 
 export const DesktopMenu = ({ loggedIn }: { loggedIn: boolean }) => {
+  const { cart } = useStore();
   return (
     <nav className="flex grow justify-between">
       <div
@@ -36,7 +38,17 @@ export const DesktopMenu = ({ loggedIn }: { loggedIn: boolean }) => {
           {loggedIn ? (
             <>
               <HeaderLink name="Cart" path="/cart">
-                <HiShoppingCart />
+                <div className="relative">
+                  <HiShoppingCart />
+                  {(cart?.products.length ?? 0) > 0 && (
+                    <span
+                      aria-label={`items in cart ${cart?.products.length}`}
+                      className="absolute -top-3 -right-3 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full"
+                    >
+                      {cart?.products.length}
+                    </span>
+                  )}
+                </div>
               </HeaderLink>
               <HeaderLink name="Logout" path="/logout" />
             </>
