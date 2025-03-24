@@ -33,9 +33,10 @@ export const FilterDrawer = ({
   const handleCategoryChange = (category: string) => setCategory(category);
 
   const handleSortOrderChange = (order: string) => setSortOrder(order);
+
   useEffect(() => {
     onFilterChange({ category, priceFrom, priceTo, rating, sortOrder });
-  }, [category, priceFrom, priceTo, rating, sortOrder, onFilterChange]);
+  }, [category, priceFrom, priceTo, rating, sortOrder]);
 
   return (
     <Drawer
