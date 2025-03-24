@@ -11,7 +11,7 @@ import {
 
 const router = createBrowserRouter([
   {
-    path: "buy",
+    path: "/buy",
     element: (
       <RouteProtect>
         <Layout />
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "products",
+        path: "/buy/products",
         element: <ProductsPage />,
       },
 
