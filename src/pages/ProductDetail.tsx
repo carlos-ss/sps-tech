@@ -1,8 +1,10 @@
 import { urls } from "@/api";
+import { AddToCartButton } from "@/components/AddToCart/AddToCart";
 
 import { useGet } from "@/hooks/request";
 import { IProduct } from "@/types/Product";
-import { Button, Rating } from "flowbite-react";
+
+import { Rating } from "flowbite-react";
 import { useParams } from "react-router";
 
 export const ProductDetailPage = () => {
@@ -52,12 +54,7 @@ export const ProductDetailPage = () => {
         </div>
         <p className="text-xl font-semibold">Description</p>
         <p className="mb-4">{description}</p>
-        <footer
-          aria-label="Add to cart button container"
-          className="flex justify-end"
-        >
-          <Button color="blue">Add to Cart</Button>
-        </footer>
+        <AddToCartButton product={product} />
       </section>
     </div>
   );

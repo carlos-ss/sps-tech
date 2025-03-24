@@ -4,6 +4,7 @@ import { IProduct, IProductListPros } from "@/types/Product";
 import { Button, Rating } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from "react-icons/hi";
+import { AddToCartButton } from "../AddToCart/AddToCart";
 
 export const ProductList = ({
   filters: { category, priceFrom, priceTo, rating, sortOrder },
@@ -68,43 +69,44 @@ export const ProductList = ({
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {paginatedProducts.map(({ id, image, title, price, rating }) => (
+            {paginatedProducts.map((product) => (
               <div
-                key={id}
+                key={product.id}
                 className="border p-4 rounded-lg shadow-md grid grid-cols-1 gap-y-1"
+                onClick={() => {}}
               >
                 <img
-                  src={image}
-                  alt={title}
+                  src={product.image}
+                  alt={product.title}
                   className="w-full h-48 object-cover"
                 />
 
-                <h2 className="text-xl font-bold">{title}</h2>
-                <p>${price.toFixed(2)}</p>
+                <h2 className="text-xl font-bold hover:text-blue-500 hover:underline">
+                  <a href={`/buy/product/${product.id}`}>{product.title}</a>
+                </h2>
+                <p>${product.price.toFixed(2)}</p>
                 <div className="flex items-center ">
                   <Rating>
                     {[...Array(5)].map((_, index) => (
                       <Rating.Star
-                        key={index + rating.rate}
-                        filled={index < rating.rate}
+                        key={index + product.rating.rate}
+                        filled={index < product.rating.rate}
                       />
                     ))}
                     <p className="ml-2 text-sm font-bold  text-white">
-                      {rating.rate.toFixed(1)}
+                      {product.rating.rate.toFixed(1)}
                     </p>
                     <span className="mx-1.5 h-1 w-1 rounded-full bg-gray-500 dark:bg-gray-400" />
                     <a
                       href="#"
                       className="text-sm font-medium  underline hover:no-underline text-white"
                     >
-                      {rating.count} reviews
+                      {product.rating.count} reviews
                     </a>
                   </Rating>
                 </div>
 
-                <div className="flex justify-end self-end">
-                  <Button color="blue">Add to Cart</Button>
-                </div>
+                <AddToCartButton product={product} />
               </div>
             ))}
           </div>
