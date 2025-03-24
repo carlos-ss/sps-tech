@@ -4,12 +4,18 @@ import { LoginPage } from "../Login";
 import { vi } from "vitest";
 import { usePost } from "@/hooks/request";
 import Cookies from "js-cookie";
+import { MemoryRouter } from "react-router";
+import { jwtDecode } from "jwt-decode";
 
 vi.mock("@/hooks/request", () => ({
   usePost: vi.fn(),
 }));
+vi.mock("jwt-decode", () => ({
+  jwtDecode: vi.fn(),
+}));
 
 const mockUsePost = usePost as jest.Mock;
+const mockJwtDecode = jwtDecode as jest.Mock;
 
 describe("LoginPage", () => {
   beforeEach(() => {
@@ -19,10 +25,14 @@ describe("LoginPage", () => {
   });
 
   it("renders the LoginPage component", () => {
-    render(<LoginPage />);
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText("Login")).toBeInTheDocument();
-    expect(screen.getByLabelText("Email input")).toBeInTheDocument();
+    expect(screen.getByLabelText("User name input")).toBeInTheDocument();
     expect(screen.getByLabelText("Password input")).toBeInTheDocument();
     expect(screen.getByLabelText("Remember-me checkbox")).toBeInTheDocument();
   });
@@ -31,12 +41,18 @@ describe("LoginPage", () => {
     const mockMutate = vi.fn((data, { onSuccess }) =>
       onSuccess({ token: "test-token" })
     );
+    mockJwtDecode.mockReturnValue({ sub: 1, user: "testuser", iat: 123456 });
+
     mockUsePost.mockReturnValue({ mutate: mockMutate });
     const cookieSpy = vi.spyOn(Cookies, "set");
-    render(<LoginPage />);
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
 
     await userEvent.type(
-      screen.getByLabelText("Email input"),
+      screen.getByLabelText("User name input"),
       "test@example.com"
     );
     await userEvent.type(screen.getByLabelText("Password input"), "password");
@@ -55,7 +71,6 @@ describe("LoginPage", () => {
     });
 
     expect(cookieSpy).toHaveBeenCalledWith("token", "test-token", {
-      httpOnly: true,
       secure: true,
       sameSite: "strict",
     });
@@ -67,10 +82,14 @@ describe("LoginPage", () => {
     );
     mockUsePost.mockReturnValue({ mutate: mockMutate });
 
-    render(<LoginPage />);
+    render(
+      <MemoryRouter>
+        <LoginPage />
+      </MemoryRouter>
+    );
 
     await userEvent.type(
-      screen.getByLabelText("Email input"),
+      screen.getByLabelText("User name input"),
       "test@example.com"
     );
     await userEvent.type(screen.getByLabelText("Password input"), "password");
@@ -87,7 +106,7 @@ describe("LoginPage", () => {
         expect.any(Object)
       );
     });
-    screen.debug();
+
     expect(screen.getByText("This error message")).toBeInTheDocument();
   });
 });

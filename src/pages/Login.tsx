@@ -12,13 +12,17 @@ import { IError, ILoginResponse } from "@/types/Request";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
+import { jwtDecode } from "jwt-decode";
+import { useStore } from "@/store";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
+  const { setUser } = useStore();
   const [toast, setToast] = useState<IToasterProps>({
     message: "",
     type: "none",
   });
+
   const mutation = usePost<ILoginResponse, IError, ILoginForm>(urls.auth);
 
   const handleDataSubmit = (data: ILoginForm) => {
@@ -29,6 +33,12 @@ export const LoginPage = () => {
           secure: true,
           sameSite: "strict",
         });
+
+        const user = jwtDecode<{ sub: number; user: string; iat: number }>(
+          data.token
+        );
+
+        setUser({ username: user.user, id: user.sub });
         navigate("/buy");
       },
       onError: (error) => {

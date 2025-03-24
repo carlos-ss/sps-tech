@@ -5,7 +5,7 @@ export interface IUser {
   password: string;
 }
 
-export interface ICurrentUser extends Omit<IUser, "password"> {}
+export interface ICurrentUser extends Omit<IUser, "password" | "email"> {}
 
 export interface IToken {
   token: string;
