@@ -6,13 +6,12 @@ export const UserForm = ({ onDataSubmit, type }: IFormProps) => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm<Form>();
 
   const onSubmit = (data: Form) => onDataSubmit(data);
 
-  watch("username");
   return (
     <form
       className="flex max-w-md flex-col gap-4"
