@@ -11,8 +11,10 @@ import { IError, ILoginResponse } from "@/types/Request";
 
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router";
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
   const [toast, setToast] = useState<IToasterProps>({
     message: "",
     type: "none",
@@ -27,6 +29,7 @@ export const LoginPage = () => {
           secure: true,
           sameSite: "strict",
         });
+        navigate("/buy");
       },
       onError: (error) => {
         // handle ui error
