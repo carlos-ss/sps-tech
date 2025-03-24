@@ -23,7 +23,7 @@ const Layout = () => {
     <Flowbite>
       <div className="min-h-screen flex flex-col justify-between">
         <Header isMobile={isMobile} />
-        <main className="flex-grow flex items-center justify-center">
+        <main className="flex-grow flex justify-center">
           <Outlet />
         </main>
         <Footer />
