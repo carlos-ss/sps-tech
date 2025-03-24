@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import RouteProtect from "../RouteProtect";
-import { userStore } from "@/store";
+import { useStore } from "@/store";
 import { vi } from "vitest";
 import Cookies from "js-cookie";
 
@@ -26,7 +26,7 @@ const localRender = () => {
 describe("RouteProtect", () => {
   it("redirects to /login if no token is present", () => {
     // no token has been set into js-cookie
-    const setLoggedInSpy = vi.spyOn(userStore.getState(), "setLoggedIn");
+    const setLoggedInSpy = vi.spyOn(useStore.getState(), "setLoggedIn");
 
     // render
     localRender();
@@ -39,7 +39,7 @@ describe("RouteProtect", () => {
   it("renders children if token is present", () => {
     // set token into js-cookie
     Cookies.set("token", "test-token");
-    const setLoggedInSpy = vi.spyOn(userStore.getState(), "setLoggedIn");
+    const setLoggedInSpy = vi.spyOn(useStore.getState(), "setLoggedIn");
 
     // render
     localRender();

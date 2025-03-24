@@ -1,10 +1,10 @@
 import { Navigate } from "react-router";
-import { userStore } from "@/store";
+import { useStore } from "@/store";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 
 const RouteProtect = ({ children }: { children: React.ReactElement }) => {
-  const setLoggedIn = userStore((state) => state.setLoggedIn);
+  const setLoggedIn = useStore((state) => state.setLoggedIn);
   const token = Cookies.get("token");
 
   useEffect(() => {

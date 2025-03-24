@@ -1,9 +1,9 @@
-import { userStore } from "@/store";
+import { useStore } from "@/store";
 import { MobileMenu } from "./components/MobileMenu";
 import { DesktopMenu } from "./components/DesktopMenu";
 
 const Header = ({ isMobile }: { isMobile: boolean }) => {
-  const { loggedIn } = userStore();
+  const { loggedIn } = useStore();
 
   return (
     <header className="flex items-center justify-between md:justify-normal">

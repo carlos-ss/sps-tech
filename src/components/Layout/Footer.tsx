@@ -1,5 +1,3 @@
-import { userStore } from "@/store";
-
 const Footer = () => {
   return (
     <footer className="flex justify-between items-center">
