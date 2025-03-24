@@ -1,7 +1,13 @@
 import { createBrowserRouter } from "react-router";
 import RouteProtect from "./RouteProtect";
 import Layout from "@/components/Layout";
-import { LoginPage, ProductsPage, RegisterPage } from "@/pages";
+import {
+  LoginPage,
+  ProductsPage,
+  RegisterPage,
+  HomePage,
+  ProductDetailPage,
+} from "@/pages";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <>home</>,
+        element: <HomePage />,
       },
       {
         path: "products",
