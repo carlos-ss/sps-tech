@@ -1,44 +1,42 @@
+import { ICart } from "@/types/Cart";
 import { ICurrentUser } from "@/types/Users";
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 type State = {
-  temp: {
-    someValue: string;
-  };
-};
-type Actions = {
-  setSomething: (value: boolean) => void;
-};
-
-export const useStore = create<State & Actions>((set) => ({
-  temp: {
-    someValue: "thisvalue",
-  },
-  setSomething: (value: boolean) => {
-    set(() => ({ temp: { someValue: value.toString() } }));
-  },
-}));
-
-type UserState = {
   loggedIn: boolean;
   user: ICurrentUser;
-};
-type UserActions = {
+  cart: ICart | null;
   setLoggedIn: (value: boolean) => void;
+  setCart: (cart: ICart) => void;
+  setUser: (user: ICurrentUser) => void;
 };
 
-// user store
-export const userStore = create<UserState & UserActions>((set) => ({
-  loggedIn: false,
-  setLoggedIn: (value: boolean) => {
-    set(() => ({ loggedIn: value }));
-  },
-  user: {
-    id: 0,
-    username: "",
-    email: "",
-  },
-  setUser: (user: ICurrentUser) => {
-    set(() => ({ user }));
-  },
-}));
+export const useStore = create<State, [["zustand/persist", unknown]]>(
+  persist(
+    (set) => ({
+      loggedIn: false,
+      setLoggedIn: (value: boolean) => {
+        set(() => ({ loggedIn: value }));
+      },
+
+      user: {
+        id: 0,
+        username: "",
+        email: "",
+      },
+      setUser: (user: ICurrentUser) => {
+        set(() => ({ user }));
+      },
+
+      cart: null,
+      setCart: (cart: ICart) => {
+        set(() => ({ cart }));
+      },
+    }),
+    {
+      name: "storage",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
