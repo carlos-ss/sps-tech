@@ -20,15 +20,13 @@ const Layout = () => {
     };
   }, []);
   return (
-    <Flowbite>
-      <div className="min-h-screen flex flex-col justify-between">
-        <Header isMobile={isMobile} />
-        <main className="flex-grow flex justify-center">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </Flowbite>
+    <div className="min-h-screen flex flex-col justify-between">
+      <Header isMobile={isMobile} />
+      <main className="flex-grow flex justify-center">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   );
 };
 

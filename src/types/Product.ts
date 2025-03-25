@@ -10,7 +10,7 @@ export interface IProduct {
     count: number;
   };
 }
-export interface IResponseProductCart {
+export interface IResponseProductForCart {
   productId: number;
   quantity: number;
 }

@@ -25,5 +25,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "setupTests.ts"]
+  "include": ["src", "setupTests.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.spec.tsx", "**/__tests__/**"]
 }

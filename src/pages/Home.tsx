@@ -1,12 +1,15 @@
 import { urls } from "@/api";
 import { useGet } from "@/hooks/request";
 import { useStore } from "@/store";
-import { ICart } from "@/types/Cart";
+import { IResponseCartProduct } from "@/types/Cart";
 import { Button } from "flowbite-react";
 import { useEffect } from "react";
 
 export const HomePage = () => {
-  const { data: carts } = useGet<ICart[]>("all-carts", urls.carts.all);
+  const { data: carts } = useGet<IResponseCartProduct[]>(
+    "all-carts",
+    urls.carts.all
+  );
   const { user, setCart } = useStore();
 
   const userCart = carts?.find((cart) => cart.userId === user.id);

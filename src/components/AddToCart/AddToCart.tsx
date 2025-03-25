@@ -5,7 +5,7 @@ import { useGet, usePost, usePut } from "@/hooks/request";
 
 import { urls } from "@/api";
 import { IError } from "@/types/Request";
-import { ICart } from "@/types/Cart";
+import { ICart, IRequestPutCart, IResponseCartProduct } from "@/types/Cart";
 import { IToasterProps, IToastType } from "@/types/Toaster";
 import Toaster from "../Toaster";
 import { useState } from "react";
@@ -20,21 +20,24 @@ export const AddToCartButton = ({ product }: IAddToCartButtonProps) => {
   });
 
   const { user, cart } = useStore();
-  const { data: carts } = useGet<ICart[]>("all-carts", urls.carts.all);
+  const { data: carts } = useGet<IResponseCartProduct[]>(
+    "all-carts",
+    urls.carts.all
+  );
 
   const existingCartId = cart && cart.id;
 
   // prepare both types of mutations to follow REST standards
-  const updateMutation = usePut<ICart[], IError, ICart>(
+  const updateMutation = usePut<IRequestPutCart[], IError, IRequestPutCart>(
     urls.carts.byId(`${existingCartId}`)
   );
   const postMutation = usePost<ICart[], IError, ICart>(urls.carts.all);
 
   // request callbacks
-  const onSuccess = (data: ICart[]) => {
+  const onSuccess = () => {
     handleToastMessage("Product added to cart", "success");
   };
-  const onError = (error: IError) => {
+  const onError = () => {
     handleToastMessage("Failed to add product to cart");
   };
 

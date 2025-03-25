@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         element: <div>public stuff</div>,
       },
       {
-        path: "login",
+        path: "/login",
         element: (
           <UserValidator>
             <LoginPage />
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "register",
+        path: "/register",
         element: (
           <UserValidator>
             <RegisterPage />

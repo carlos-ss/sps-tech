@@ -36,7 +36,7 @@ export const RegisterPage = () => {
             type: "success",
           });
         },
-        onError: (error) => {
+        onError: (_error) => {
           // handle ui error
           setToast({ message: "Failed to create User", type: "error" });
         },
