@@ -1,4 +1,4 @@
-import { ICart } from "@/types/Cart";
+import { IResponseCartProduct } from "@/types/Cart";
 import { ICurrentUser } from "@/types/Users";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
@@ -6,9 +6,9 @@ import { persist, createJSONStorage } from "zustand/middleware";
 type State = {
   loggedIn: boolean;
   user: ICurrentUser;
-  cart: ICart | null;
+  cart: IResponseCartProduct | null;
   setLoggedIn: (value: boolean) => void;
-  setCart: (cart: ICart) => void;
+  setCart: (cart: IResponseCartProduct) => void;
   setUser: (user: ICurrentUser) => void;
 };
 
@@ -30,7 +30,7 @@ export const useStore = create<State, [["zustand/persist", unknown]]>(
       },
 
       cart: null,
-      setCart: (cart: ICart) => {
+      setCart: (cart: IResponseCartProduct) => {
         set(() => ({ cart }));
       },
     }),

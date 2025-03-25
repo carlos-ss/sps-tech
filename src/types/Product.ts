@@ -10,6 +10,10 @@ export interface IProduct {
     count: number;
   };
 }
+export interface IResponseProductCart {
+  productId: number;
+  quantity: number;
+}
 
 export interface IProductFilter {
   category: string;
