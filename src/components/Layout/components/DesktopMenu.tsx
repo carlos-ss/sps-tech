@@ -37,7 +37,7 @@ export const DesktopMenu = ({ loggedIn }: { loggedIn: boolean }) => {
         <ul className="inline-flex  ">
           {loggedIn ? (
             <>
-              <HeaderLink name="Cart" path="/cart">
+              <HeaderLink name="Cart" path="/buy/cart">
                 <div className="relative">
                   <HiShoppingCart />
                   {(cart?.products.length ?? 0) > 0 && (

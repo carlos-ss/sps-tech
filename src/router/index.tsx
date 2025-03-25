@@ -7,6 +7,7 @@ import {
   RegisterPage,
   HomePage,
   ProductDetailPage,
+  CartPage,
 } from "@/pages";
 import UserValidator from "./UserValidator";
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         path: "/buy/product/:id",
         element: <ProductDetailPage />,
       },
+      {
+        path: "/buy/cart",
+        element: <CartPage />,
+      },
 
       {
         path: "*",
@@ -43,7 +48,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>public stuf</div>,
+        element: <div>public stuff</div>,
       },
       {
         path: "login",
